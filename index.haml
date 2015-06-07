@@ -1,0 +1,293 @@
+!!!html5
+
+%html
+  %head
+    %title AWS: Things as a Service
+    :sass
+      .left
+        li
+          width: 30%
+          font-size: 0.7em
+          float: left
+          padding: 0.1em
+      .red
+        color: #e00
+  %body
+
+    %textarea{id: 'source'}
+      :preserve
+        class: center middle
+
+        # AWS: Things as a Service
+
+        ## Embrace the lock-in
+
+        ---
+
+        # Me
+
+        * Calum Gilchrist
+        * DevOps Engineer at FanDuel
+        * Been using AWS for 2 years
+        * Have 2 AWS Certifications
+        * Manage ~800 Servers at the moment
+
+
+        ---
+
+        # AWS Products
+
+        There are quite a few [aws.amazon.com/products](https://aws.amazon.com/products/)
+
+        .left[
+        1. Amazon EC2  
+        1. Amazon EC2 Container Service  
+        1. AWS Lambda  
+        1. Auto Scaling  
+        1. Amazon VPC  
+        1. Elastic Load Balancing  
+        1. Amazon S3  
+        1. Amazon Glacier  
+        1. Amazon EBS  
+        1. Amazon Elastic File System  
+        1. AWS Import/Export  
+        1. AWS Storage Gateway  
+        1. Amazon CloudFront  
+        1. Amazon RDS  
+        1. Amazon DynamoDB  
+        1. Amazon Redshift  
+        1. Amazon ElastiCache  
+        1. Amazon VPC  
+        1. AWS Direct Connect  
+        1. Amazon Route 53  
+        1. Elastic Load Balancing  
+        1. AWS Directory Service  
+        1. AWS Identity and Access Management (IAM)  
+        1. AWS CloudTrail  
+        1. AWS Config  
+        1. AWS CloudHSM  
+        1. AWS Key Management Service  
+        1. Amazon CloudWatch  
+        1. AWS Trusted Advisor  
+        1. Amazon EMR  
+        1. Amazon Kinesis  
+        1. Amazon Redshift  
+        1. AWS Data Pipeline  
+        1. Amazon Machine Learning  
+        1. Amazon SQS  
+        1. Amazon SWF  
+        1. Amazon AppStream  
+        1. Amazon SES  
+        1. Amazon CloudSearch  
+        1. Amazon SNS  
+        1. Amazon FPS (Flexible Payment Service)  
+        1. AWS Elastic Beanstalk  
+        1. AWS OpsWorks  
+        1. AWS CloudFormation  
+        1. AWS CodeDeploy  
+        1. Amazon Cognito  
+        1. Amazon Mobile Analytics  
+        1. Amazon SNS  
+        1. Amazon WorkSpaces  
+        1. Amazon WorkDocs  
+        1. AWS Support  
+        1. AWS Trusted Advisor  
+        1. Amazon Elastic Transcoder  
+        ]
+
+        ---
+
+        # We're Going to Talk About
+
+        1. EC2
+        1. Autoscaling
+        1. ELBs
+        1. RDS
+        1. Elasticache
+        1. Elastic Beanstalk
+        1. ECS
+        1. Lambda
+        1. SQS & SNS
+        1. DynamoDB
+        1. Cloudformation
+
+        ---
+
+        # EC2 (Elastic Compute Cloud)
+
+        Compute as a service
+
+        * Core of AWS
+        * Pay per hour
+        * Behind the scenes, _everything_ is on EC2
+        * AMIs (Amazon Machine Images) are used to provision
+        * Snapshots out the box.red[*]
+        * Firewalls for free.red[**]
+        * VPC (Virtual Private Cloud)
+
+        .footnote[
+          \* But not on schedule
+          
+          \** There are limits]
+
+        ---
+
+        # Autoscaling
+
+        The main reason to use AWS, IMO
+
+        * Take an AMI
+        * Pick an ELB
+        * Setup alarms
+        * Now you have autoscaling
+
+        ---
+
+        # ELB (Elastic Load Balancer)
+
+        Load balancing as a service. 
+
+        * Push some buttons
+        * Add some instances
+        * You're now loadbalancing!.red[*]
+        * Pay per hour, flat rate (Don't pay more for more traffic!)
+
+        .footnote[\* * Cannot serve UDP
+        * Only choice of balancing is round robin
+        * Can get picky with long lived connections
+        * Need to _warm_]
+
+        ---
+
+        # RDS (Relational Database Service)
+
+        Never setup replication again, right?
+
+        * One click
+        * Supports:
+          * MySQL
+          * Postgres
+          * MSSQL.red[*]
+          * Oracle.red[*]
+        * Automatic snapshots
+        * Hourly recovery
+        * Multi-AZ in one button.red[**]
+        * Auto updates
+        * No multi-master support
+
+        .footnote[
+        \* Either bring your own license or add the license cost to your hourly fee
+
+        \** Uses DNS propogation, takes a few minutes, but automatic!]
+
+
+        ---
+
+        # Aurora (in Beta)
+
+        Extremely enhanced MySQL
+
+        ---
+
+        # DynamoDB
+
+        A NoSQL database as a service
+
+        * Highly scalabe
+        * Infinitely large tables, 100 million row tables quite common
+        * Pay for throughput
+        * All about data partitioning!
+        * One database per region
+
+        ---
+
+        # Elasticache
+
+        In-Memory Caching as a Service
+
+        * Supports:
+          * Redis
+          * Memcache
+        * Automatic Failover to a Read Replica.red[*]
+
+        .footnote[
+        \* Same DNS failover, roughly 5 minutes to failover in testing
+        ]
+        ---
+
+        # Elastic Beanstalk
+
+        Heroku_?_ as a Service
+
+        Very similar solution to Heroku
+
+        * Give it a Git url
+        * Fill in some forms
+        * **POOF** you have an autoscaling server with a database and an ELB
+        * Unlike Heroku, you get full access to the underlying EC2 instance
+
+        ---
+
+        # ECS _Elastic Container Service_ (in beta)
+
+        Docker container management as a Service
+
+        * Manage your Docker cluster and placement
+        * Automatically replace "unhealthy" containers"
+        * Installs containers onto running EC2 instances (still need to manage these)
+        * Create a task definition in JSON, similar to Compose
+        * Still in active development, console only added last month
+        * ELBs sort of work, essentially map one container per instance
+
+        ---
+
+        # AWS Lambda
+
+        Short lived functions as a service
+
+        * Containers that last between 1-60 seconds
+        * Run Javascript functions on Node.js
+        * Spun up from the API or through SNS triggers
+        * If you want cron you need another instance
+
+        ---
+
+        # SQS _Simple Queueing Service_
+
+        A Queue as a service
+
+        * Pay for throughput
+        * Holds 2 weeks of messages
+        * Throw as much as you want at it
+        * Built in latency 
+
+        ---
+
+        # SNS _Simple Notification Service_
+
+        Push notifications as a service
+
+        * Can easily integrate with SQS and between other AWS Services
+        * Send messages to one or more topics
+        * A topic can be anything from Lambda, SQS to a REST API to SES (Simple Email Service)
+
+
+        # The End
+
+        * More information can be found at: [aws.amazon.com/products](https://aws.amazon.com/products/)
+        * Read the FAQs, full of information about restrictions and gritty details
+        * Slides made with: [github.com/gnab/remark](https://github.com/gnab/remark)
+
+        ## Me
+
+        * me[AT]calumgilchrist.co.uk
+        * [@homelinen](http://twitter.com/homelinen)
+        
+        FanDuel are hiring [fanduel.com/careers](http://fanduel.com/careers)
+
+
+    %script{src: 'js/remark-latest.min.js'}
+    %script
+      var slideshow = remark.create();
+
+
