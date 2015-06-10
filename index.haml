@@ -327,6 +327,12 @@
         * ELBs sort of work, essentially map one container per instance
         * If you just want to launch a container use Beanstalk
 
+        --
+
+        ## Elastic Beanstalk
+
+        If you just want a container in AWS Beanstalk may be the right move
+
         ---
 
         # AWS Lambda
@@ -363,10 +369,30 @@
 
         # Cloudformation
 
+        Infrastructure as Code as a Service
 
+        * Upload a template in nice friendly JSON (Or use Troposphere, Ruby-Cloudformation-DSL, YAML to Json converter, etc)
+        * Supply some parameters to it (VPC, instance size, what have you)
+        * Click launch
+        * Have a full stack
+
+        --
+
+        ## Danger Will Robinson
+
+        --
+
+        * No dry-run mode
+        * Update actions are more than likely destructive
+        * Woops, I clicked delete, where did the site go?
 
         ---
+
         # Lock-in
+
+        * Getting data out
+        * Keeping what you have, where does my replication go?
+        * Trust
 
         ---
 
