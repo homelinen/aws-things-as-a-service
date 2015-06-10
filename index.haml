@@ -31,7 +31,7 @@
 
       // Colours!
       .grey
-        color: #828e8e
+        color: #57534F
       .red
         color: #dc322f
       .green
@@ -67,7 +67,7 @@
 
         There are quite a few [aws.amazon.com/products](https://aws.amazon.com/products/)
 
-        .left[
+        .grey[.left[
         1. Amazon EC2  
         1. Amazon EC2 Container Service  
         1. AWS Lambda  
@@ -119,7 +119,7 @@
         1. AWS Support  
         1. AWS Trusted Advisor  
         1. Amazon Elastic Transcoder  
-        ]
+        ]]
 
         ---
 
@@ -143,7 +143,7 @@
         1. Amazon CloudFront  
         1. .blue[Amazon RDS]  
         1. .blue[Amazon DynamoDB]  
-        1. Amazon blueshift  
+        1. Amazon Redshift  
         1. .blue[Amazon ElastiCache]  
         1. AWS Direct Connect  
         1. Amazon Route 53  
@@ -157,7 +157,7 @@
         1. AWS Trusted Advisor  
         1. Amazon EMR  
         1. Amazon Kinesis  
-        1. Amazon blueshift  
+        1. Amazon Redshift  
         1. AWS Data Pipeline  
         1. Amazon Machine Learning  
         1. Amazon SQS  
@@ -220,14 +220,14 @@
 
         ---
 
-        # Autoscaling
+        # ASG: Autoscaling Groups
 
-        The main reason to use AWS, IMO
+        ![aws-pricing](images/pricing-page_pay-as-you-go-large.png)
 
-        * Take an AMI
-        * Pick an ELB
-        * Setup alarms
-        * Now you have autoscaling
+        * Pets vs Cattle
+        * Schedule when you scale up
+        * Set scaling policies for traffic spikes
+        * Best way to use AWS
 
         ---
 
@@ -237,16 +237,17 @@
 
         * Push some buttons
         * Add some instances
-        * You're now loadbalancing!.red[*]
-        * Pay per hour, flat rate \(Don't pay more for more traffic!\)
+        * You're now loadbalancing!
+        * Scale with your application! .red[4] 
+        * If it's not HTTP it's quite limited
         
+        --
 
         ## Caveats
 
-        * Cannot serve UDP
-        * Only choice of balancing is round robin
-        * Can get picky with long lived connections
-        * Need to _warm_
+        1. Cannot serve UDP
+        1. Only choice of balancing is round robin
+        1. Sometime need to **warm** an ELB
 
         ---
 
@@ -301,23 +302,16 @@
         * Supports:
           * Redis
           * Memcache
+        * Autodiscovery tool for Memcache nodes
+
+        ## Redis
+
         * Automatic Failover to a Read Replica.red[*]
+        * One DNS endpoint for primary (none for replicas)
 
         .footnote[
         \* Same DNS failover as RDS, roughly 5 minutes to failover in testing
         ]
-        ---
-
-        # Elastic Beanstalk
-
-        Heroku_?_ as a Service
-
-        Very similar solution to Heroku
-
-        * Give it a Git url
-        * Fill in some forms
-        * **POOF** you have an autoscaling server with a database and an ELB
-        * Unlike Heroku, you get full access to the underlying EC2 instance
 
         ---
 
@@ -331,6 +325,7 @@
         * Create a task definition in JSON, similar to Compose
         * Still in active development, console only added last month
         * ELBs sort of work, essentially map one container per instance
+        * If you just want to launch a container use Beanstalk
 
         ---
 
@@ -366,6 +361,15 @@
 
         ---
 
+        # Cloudformation
+
+
+
+        ---
+        # Lock-in
+
+        ---
+
         # The End
 
         * More information can be found at: [aws.amazon.com/products](https://aws.amazon.com/products/)
@@ -376,6 +380,7 @@
         [Amazon Web Services User Group
         Scotland](http://www.meetup.com/Amazon-Web-Services-User-Group-Scotland/events/222813260/)
         on Meetup.com.
+        * Slides at [slides.calumgilchrist.co.uk/aws](http://slides.calumgilchrist.co.uk/aws/index.html) and [github.com/homelinen/aws-things-as-a-service](https://github.com/homelinen/aws-things-as-a-service)
 
         ## Me
 
