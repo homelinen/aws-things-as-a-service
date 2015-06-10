@@ -62,7 +62,6 @@
         * Calum Gilchrist
         * DevOps Engineer at FanDuel
         * Been using AWS for 2 years
-        * Have 2 AWS Certifications
         * Manage ~800 Servers across live and test at the moment
 
         ---
@@ -280,7 +279,7 @@
         --
 
         * Things to Note
-          * Limited Extensions for PostGres (PostGIS is one of the few)
+          * Limited Extensions for Postgres (PostGIS is one of the few)
           * MySQL Engines: InnoDB is expected
           * Aurora MySQL Engine promises a lot
           * Bring your own license for Oracle/MSSQL or pay on top of the hourly fee
@@ -312,6 +311,7 @@
 
         * Automatic Failover to a Read Replica.red[*]
         * One DNS endpoint for primary (none for replicas)
+        * Up to 5 replicas
 
         .footnote[
         \* Same DNS failover as RDS, roughly 5 minutes to failover in testing
@@ -335,7 +335,7 @@
 
         ## Elastic Beanstalk
 
-        If you just want a container in AWS Beanstalk may be the right move
+        If you just want a container in AWS Elastic Beanstalk allows this
 
         ---
 
@@ -345,7 +345,8 @@
 
         * Containers that last between 1-60 seconds
         * Run Javascript functions on Node.js
-        * Spun up from the API or through SNS triggers
+        * Spun up from the API or through S3, or SNS triggers
+        * Can upload arbitrary binaries so can get Go running
         * If you want cron you need another instance
 
         ---
@@ -358,6 +359,7 @@
         * Holds 2 weeks of messages
         * Throw as much as you want at it
         * Built in latency 
+        * At least once style of delivery 
 
         ---
 
@@ -368,6 +370,15 @@
         * Can easily integrate with SQS and between other AWS Services
         * Send messages to one or more topics
         * A topic can be anything from Lambda, SQS to a REST API to SES (Simple Email Service)
+
+        -- 
+
+        ## Example
+
+        1. On autoscaling events, send a message to an SQS topic. 
+        1. Another service polls the queue and reads off autoscaling events
+        1. When a create or terminate event is read, get the instance IP and add it to a discovery service such as Consul/DNS
+        1. Now your new instances are queriable
 
         ---
 
@@ -386,7 +397,7 @@
 
         --
 
-        * No dry-run mode
+        * No dry-run mode (Been rumoured about for years)
         * Update actions are more than likely destructive
         * Woops, I clicked delete, where did the site go?
 
@@ -397,6 +408,15 @@
         * Getting data out
         * Keeping what you have, where does my replication go?
         * Trust
+        * Replicating the "magic" in another data center
+
+        -- 
+
+        ## Solutions
+
+        * Just use EC2 with configuration management (expensive)
+        * Use lots of clouds
+        * Docker/vagrant & packer
 
         ---
 
