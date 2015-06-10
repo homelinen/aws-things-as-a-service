@@ -4,14 +4,34 @@
   %head
     %title AWS: Things as a Service
     :sass
+      .remark-slide-content
+        color: #002b36
+        font-family: "Droid Sans"
+        font-size: 130%
+        background-color: #f7f7f7
       .left
+        ol
+          padding: 0
+          margin: 0
         li
-          width: 30%
+          width: 28%
           font-size: 0.7em
           float: left
           padding: 0.1em
+          margin-left: 1.6em
+      .grey
+        color: #828e8e
       .red
-        color: #e00
+        color: #dc322f
+      .green
+        color: #859900 
+      .yellow
+        color: #b58900
+      .blue
+        color: #268bd2
+      .footnote
+        font-size: 0.9em
+      
   %body
 
     %textarea{id: 'source'}
@@ -56,10 +76,8 @@
         1. Amazon DynamoDB  
         1. Amazon Redshift  
         1. Amazon ElastiCache  
-        1. Amazon VPC  
         1. AWS Direct Connect  
         1. Amazon Route 53  
-        1. Elastic Load Balancing  
         1. AWS Directory Service  
         1. AWS Identity and Access Management (IAM)  
         1. AWS CloudTrail  
@@ -96,19 +114,63 @@
 
         ---
 
-        # Todays Selection
+        # AWS Products
 
-        1. EC2
-        1. Autoscaling
-        1. ELBs
-        1. RDS
-        1. Elasticache
-        1. Elastic Beanstalk
-        1. ECS
-        1. Lambda
-        1. SQS & SNS
-        1. DynamoDB
-        1. Cloudformation
+        There are quite a few [aws.amazon.com/products](https://aws.amazon.com/products/)
+
+        .grey[.left[
+        1. .blue[Amazon EC2]
+        1. .blue[Amazon EC2 Container Service]  
+        1. .blue[AWS Lambda]  
+        1. .blue[Auto Scaling]  
+        1. .yellow[Amazon VPC]  
+        1. .blue[Elastic Load Balancing]  
+        1. Amazon S3  
+        1. Amazon Glacier  
+        1. .yellow[Amazon EBS]  
+        1. Amazon Elastic File System  
+        1. AWS Import/Export  
+        1. AWS Storage Gateway  
+        1. Amazon CloudFront  
+        1. .blue[Amazon RDS]  
+        1. .blue[Amazon DynamoDB]  
+        1. Amazon blueshift  
+        1. .blue[Amazon ElastiCache]  
+        1. AWS Direct Connect  
+        1. Amazon Route 53  
+        1. AWS Directory Service  
+        1. .yellow[AWS Identity and Access Management (IAM)]
+        1. AWS CloudTrail  
+        1. AWS Config  
+        1. AWS CloudHSM  
+        1. AWS Key Management Service  
+        1. .yellow[Amazon CloudWatch]  
+        1. AWS Trusted Advisor  
+        1. Amazon EMR  
+        1. Amazon Kinesis  
+        1. Amazon blueshift  
+        1. AWS Data Pipeline  
+        1. Amazon Machine Learning  
+        1. Amazon SQS  
+        1. Amazon SWF  
+        1. Amazon AppStream  
+        1. Amazon SES  
+        1. Amazon CloudSearch  
+        1. .blue[Amazon SNS]  
+        1. Amazon FPS (Flexible Payment Service)  
+        1. .blue[AWS Elastic Beanstalk]  
+        1. AWS OpsWorks  
+        1. .blue[AWS CloudFormation]  
+        1. AWS CodeDeploy  
+        1. Amazon Cognito  
+        1. Amazon Mobile Analytics  
+        1. .blue[Amazon SNS]  
+        1. Amazon WorkSpaces  
+        1. Amazon WorkDocs  
+        1. AWS Support  
+        1. AWS Trusted Advisor  
+        1. Amazon Elastic Transcoder  
+        ]]
 
         ---
 
@@ -167,42 +229,47 @@
         * Push some buttons
         * Add some instances
         * You're now loadbalancing!.red[*]
-        * Pay per hour, flat rate (Don't pay more for more traffic!)
+        * Pay per hour, flat rate \(Don't pay more for more traffic!\)
+        
 
-        .footnote[\* * Cannot serve UDP
+        ## Caveats
+
+        * Cannot serve UDP
         * Only choice of balancing is round robin
         * Can get picky with long lived connections
-        * Need to _warm_]
+        * Need to _warm_
 
         ---
 
         # RDS (Relational Database Service)
 
-        Never setup replication again, right?
+        Databases as service, never setup MySQL again, right?
 
-        * One click
-        * Supports:
-          * MySQL
-          * Postgres
-          * MSSQL.red[*]
-          * Oracle.red[*]
-        * Automatic snapshots
-        * Hourly recovery
-        * Multi-AZ in one button.red[**]
-        * Auto updates
-        * No multi-master support
+        * Backups: Daily 
+        --
+        _for 30 days_ without custom scripting
 
-        .footnote[
-        \* Either bring your own license or add the license cost to your hourly fee
+        --
 
-        \** Uses DNS propogation, takes a few minutes, but automatic!]
+        * Recovery: point-in-time within retention period. 
+        --
+        _Unless you use MyISAM_
 
+        --
 
-        ---
+        * Automatic failover to a read replica 
+        --
+        _takes 5 minutes to failover_, DNS
 
-        # Aurora (in Beta)
+        * Encryption: use AWS KMS you can encrypt the data at rest.
 
-        Extremely enhanced MySQL
+        --
+
+        * Things to Note
+          * Limited Extensions for PostGres (PostGIS is one of the few)
+          * MySQL Engines: InnoDB is expected
+          * Aurora MySQL Engine promises a lot
+          * Bring your own license for Oracle/MSSQL or pay on top of the hourly fee
 
         ---
 
@@ -228,7 +295,7 @@
         * Automatic Failover to a Read Replica.red[*]
 
         .footnote[
-        \* Same DNS failover, roughly 5 minutes to failover in testing
+        \* Same DNS failover as RDS, roughly 5 minutes to failover in testing
         ]
         ---
 
