@@ -4,11 +4,17 @@
   %head
     %title AWS: Things as a Service
     :sass
+      @font-face
+        font-family: Roboto
+        src: url(fonts/Roboto-Regular.ttf)
+
       .remark-slide-content
         color: #002b36
-        font-family: "Droid Sans"
+        font-family: Roboto
         font-size: 130%
         background-color: #f7f7f7
+
+      // Multicolumn list hack
       .left
         ol
           padding: 0
@@ -19,6 +25,11 @@
           float: left
           padding: 0.1em
           margin-left: 1.6em
+
+      .footnote
+        font-size: 0.9em
+
+      // Colours!
       .grey
         color: #828e8e
       .red
@@ -29,8 +40,6 @@
         color: #b58900
       .blue
         color: #268bd2
-      .footnote
-        font-size: 0.9em
       
   %body
 
